@@ -32,8 +32,8 @@ lp = 60
 cx = rm*1e-3*np.sin(np.arange(0.00,6.29,0.01))  # Circle for rmw plots.
 cy = rm*1e-3*np.cos(np.arange(0.00,6.29,0.01))
 
-p = Kepert_linear_assym(xgrid, ygrid, lat=-15, rm=4e4, vm=65.0, b=1.4, \
-                        dp=9680.13292308, pe=1e5, rho=1.15, Ut=-5)
+p = Kepert_linear_assym(xgrid, ygrid, lat=-15, rm=4e4, vm=65.0, b=1.5, \
+                        dp=7000.13292308, pe=1e5, rho=1.15, Ut=-5)
 
 #output circle for rmw plots
 
