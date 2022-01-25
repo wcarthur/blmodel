@@ -76,7 +76,7 @@ class Kepert_linear_assym:
         fig, axes = plt.subplots(2, 2,subplot_kw={'aspect':'equal'},
                                  figsize=(18,18))
         ax = axes.flatten()
-        ax[0].hold(True)
+        #ax[0].hold(True)
         ax[0].set_xlim([-50,50])
         ax[0].set_ylim([-50,50])
         levels = np.arange(-20, 21, 2)
@@ -96,7 +96,7 @@ class Kepert_linear_assym:
             / np.sqrt(b*dp*rmrb*emrmrb/rho + (r*f/2)**2) + \
             (np.sqrt(b*dp*rmrb*emrmrb/rho + (r*f/2)**2))/r
         
-        ax[1].hold(True)
+        #ax[1].hold(True)
         ax[1].set_xlim([-50, 50])
         ax[1].set_ylim([-50, 50])
         levels = np.arange(-0.02, 0.021, .002)
@@ -141,7 +141,7 @@ class Kepert_linear_assym:
         V = V*np.sign(f)
         Z = Z*np.sign(f)
 
-        ax[2].hold(True)
+        #ax[2].hold(True)
         #set(plt.gca(),'DataAspectRatio',[1,1,1])
         ax[2].set_xlim([-50,50])
         ax[2].set_ylim([-50,50])
@@ -152,7 +152,7 @@ class Kepert_linear_assym:
         plt.colorbar(cm, ax=ax[2])
         ax[2].plot(cx,cy,'w')
 
-        ax[3].hold(True)
+        #ax[3].hold(True)
         #set(plt.gca(),'DataAspectRatio',[1,1,1])
         ax[3].set_xlim([-50,50])
         ax[3].set_ylim([-50,50])
@@ -205,8 +205,8 @@ class Kepert_linear_assym:
         Am[III] = AmIII[III]
 
         # First asymmetric surface component
-        ums =       albe * (Am * np.exp(-i*lam*np.sign(f))).real  
-        vms = np.sign(f) * (Am * np.exp(-i*lam*np.sign(f))).imag
+        ums =       albe * (Am * np.exp(-i*(thetaFm - lam)*np.sign(f))).real  
+        vms = np.sign(f) * (Am * np.exp(-i*(thetaFm - lam)*np.sign(f))).imag
 
 
         Ap = -(eta * (1 - 2 * albe + (1 + i)*(1 - albe) * psi) * Umod) \
@@ -216,14 +216,14 @@ class Kepert_linear_assym:
         Ap[III] = ApIII[III]
 
         # Second asymmetric surface component
-        ups =       albe * (Ap * np.exp(i*lam*np.sign(f))).real 
-        vps = np.sign(f) * (Ap * np.exp(i*lam*np.sign(f))).imag
+        ups =       albe * (Ap * np.exp(i*(thetaFm - lam)*np.sign(f))).real 
+        vps = np.sign(f) * (Ap * np.exp(i*(thetaFm - lam)*np.sign(f))).imag
         
 
         fig, axes = plt.subplots(2, 2, figsize=(18, 18),
                                  subplot_kw={'aspect':'equal'})
         ax = axes.flatten()
-        ax[0].hold(True)
+        #ax[0].hold(True)
         #set(plt.gca(),'DataAspectRatio',[1,1,1])
         ax[0].set_xlim([-100,100])
         ax[0].set_ylim([-100,100])
@@ -236,7 +236,7 @@ class Kepert_linear_assym:
         ax[0].plot(2*cx,2*cy,'w')
         ax[0].set_xlabel("u0s")
 
-        ax[1].hold(True)
+        #ax[1].hold(True)
         #set(plt.gca(),'DataAspectRatio',[1,1,1])
         ax[1].set_xlim([-100,100])
         ax[1].set_ylim([-100,100])
@@ -249,7 +249,7 @@ class Kepert_linear_assym:
         ax[1].plot(2*cx,2*cy,'w')
         ax[1].set_xlabel("ups")
 
-        ax[2].hold(True)
+        #ax[2].hold(True)
         #set(plt.gca(),'DataAspectRatio',[1,1,1])
         ax[2].set_xlim([-100,100])
         ax[2].set_ylim([-100,100])
@@ -268,7 +268,7 @@ class Kepert_linear_assym:
         us =     (u0s + ups + ums)
         vs = V + (v0s + vps + vms)
 
-        ax[3].hold(True)
+        #ax[3].hold(True)
         #set(plt.gca(),'DataAspectRatio',[1,1,1])
         ax[3].set_xlim([-100,100])
         ax[3].set_ylim([-100,100])
@@ -297,7 +297,7 @@ class Kepert_linear_assym:
         #plt.clf()
         #plt.subplot(221, aspect='equal')
         #plt.cla()
-        ax[0].hold(True)
+        #ax[0].hold(True)
         #set(plt.gca(),'DataAspectRatio',[1,1,1])
         ax[0].set_xlim([-150,150])
         ax[0].set_ylim([-150,150])
@@ -317,7 +317,7 @@ class Kepert_linear_assym:
         ax[1].set_ylim([-150,150])
         cm = ax[1].contourf(xkm,ykm,vsf,range(-100,101,5))
         cs = ax[1].contour(xkm,ykm,vsf,range(-100,101,5),colors='k')
-        ax[1].clabel(cs, fontsize='x0small', fmt='%1.2f') 
+        ax[1].clabel(cs, fontsize='x-small', fmt='%1.2f') 
         plt.colorbar(cm, ax=ax[1])
         ax[1].plot(cx,cy,'w')
         ax[1].plot(2*cx,2*cy,'w')
@@ -364,7 +364,7 @@ class Kepert_linear_assym:
 
         plt.clf()
         plt.subplot(111, aspect='equal')
-        plt.hold(True)
+        #plt.hold(True)
         plt.xlim([-150, 150])
         plt.ylim([-150, 150])
         mag = np.sqrt(Ux**2 + Vy**2) # Magnitude of the total surface wind
@@ -384,7 +384,7 @@ class Kepert_linear_assym:
         plt.clf()
         plt.subplot(221, aspect='equal')
         plt.cla()
-        plt.hold(True)
+        #plt.hold(True)
         plt.xlim([-150,150])
         plt.ylim([-150,150])
         cm = plt.contourf(xkm,ykm,swf1,levels=np.arange(0.5,1.55,0.05))
@@ -399,7 +399,7 @@ class Kepert_linear_assym:
               ' lat=' + repr(lat) + ' K=' + repr(K) + ' C=' + repr(C))
         plt.subplot(222, aspect='equal')
         plt.cla()
-        plt.hold(True)
+        #plt.hold(True)
 
         plt.xlim([-150,150])
         plt.ylim([-150,150])
@@ -412,7 +412,7 @@ class Kepert_linear_assym:
         plt.xlabel('Storm-relative total swrf')
         plt.subplot(223, aspect='equal')
         plt.cla()
-        plt.hold(True)
+        #plt.hold(True)
         plt.xlim([-150,150])
         plt.ylim([-150,150])
         cm = plt.contourf(xkm,ykm,swf3,levels=np.arange(0.5,1.55,0.05))
@@ -424,7 +424,7 @@ class Kepert_linear_assym:
         plt.xlabel('Earth-relative azimuthal swrf')
         plt.subplot(224, aspect='equal')
         plt.cla()
-        plt.hold(True)
+        #plt.hold(True)
         plt.xlim([-150,150])
         plt.ylim([-150,150])
         cm = plt.contourf(xkm,ykm,swf4,levels=np.arange(0.5,1.55,0.05))
@@ -492,8 +492,8 @@ class Kepert_linear_assym:
         plt.cla()
         lp = 60
         cm = plt.contourf(xx,z,np.squeeze(u[:,lp+1,:]),ucon)
-        plt.hold(True)
-        cs = plt.contour(xx,z,np.squeeze(u[:,lp+1,:]),levels=[0,0],colors='k',linewidths=2)
+        #plt.hold(True)
+        cs = plt.contour(xx,z,np.squeeze(u[:,lp+1,:]),levels=[0],colors='k',linewidths=2)
         plt.colorbar(cm)
         plt.xlabel('Storm-relative u WE section')
         plt.title(r'$V_m=$' + repr(vm) + r' $r_m=$' + repr(rm*1e-3) + r' $b=$' + repr(b) + \
@@ -502,22 +502,22 @@ class Kepert_linear_assym:
         plt.subplot(222)
         plt.cla()
         cm = plt.contourf(xx,z,np.squeeze(u[:,:,lp+1]),levels=ucon)
-        plt.hold(True)
-        cs = plt.contour(xx,z,np.squeeze(u[:,:,lp+1]),levels=[0,0],colors='k', linewidths=2)
+        #plt.hold(True)
+        cs = plt.contour(xx,z,np.squeeze(u[:,:,lp+1]),levels=[0],colors='k', linewidths=2)
         plt.colorbar(cm)
         plt.xlabel('Storm-relative u SN section')
         plt.subplot(223)
         plt.cla()
         cm = plt.contourf(xx,z,np.squeeze(v[:,lp+1,:]),vcon)
-        plt.hold(True)
-        cs = plt.contour(xx,z,np.squeeze(v[:,lp+1,:]),levels=[0,0],colors='k')
+        #plt.hold(True)
+        cs = plt.contour(xx,z,np.squeeze(v[:,lp+1,:]),levels=[0],colors='k')
         plt.colorbar(cm)
         plt.xlabel('Storm-relative v WE section')
         plt.subplot(224)
         plt.cla()
         cm = plt.contourf(xx,z,np.squeeze(v[:,:,lp+1]),vcon)
-        plt.hold(True)
-        cs = plt.contour(xx,z,np.squeeze(v[:,:,lp+1]),levels=[0,0],colors='k', linewidths=2)
+        #plt.hold(True)
+        cs = plt.contour(xx,z,np.squeeze(v[:,:,lp+1]),levels=[0],colors='k', linewidths=2)
         plt.colorbar(cm)
         plt.xlabel('Storm-relative v SN section')        
         plt.tight_layout()
@@ -531,8 +531,8 @@ class Kepert_linear_assym:
         plt.cla()
         lp = 60
         cm = plt.contourf(xx,z,np.squeeze(ux[:,lp+1,:]),ucon)
-        plt.hold(True)
-        cs = plt.contour(xx,z,np.squeeze(ux[:,lp+1,:]),levels=[0,0],colors='k',linewidths=2)
+        #plt.hold(True)
+        cs = plt.contour(xx,z,np.squeeze(ux[:,lp+1,:]),levels=[0],colors='k',linewidths=2)
         plt.colorbar(cm)
         plt.xlabel('Earth-relative u WE section')
         plt.title(r'$V_m=$' + repr(vm) + r' $r_m=$' + repr(rm*1e-3) + r' $b=$' + repr(b) + \
@@ -541,22 +541,22 @@ class Kepert_linear_assym:
         plt.subplot(222)
         plt.cla()
         cm = plt.contourf(xx,z,np.squeeze(ux[:,:,lp+1]),levels=ucon)
-        plt.hold(True)
-        cs = plt.contour(xx,z,np.squeeze(ux[:,:,lp+1]),levels=[0,0],colors='k', linewidths=2)
+        #plt.hold(True)
+        cs = plt.contour(xx,z,np.squeeze(ux[:,:,lp+1]),levels=[0],colors='k', linewidths=2)
         plt.colorbar(cm)
         plt.xlabel('Earth-relative u SN section')
         plt.subplot(223)
         plt.cla()
         cm = plt.contourf(xx,z,np.squeeze(vx[:,lp+1,:]),vcon)
-        plt.hold(True)
-        cs = plt.contour(xx,z,np.squeeze(vx[:,lp+1,:]),levels=[0,0],colors='k')
+        #plt.hold(True)
+        cs = plt.contour(xx,z,np.squeeze(vx[:,lp+1,:]),levels=[0],colors='k')
         plt.colorbar(cm)
         plt.xlabel('Earth-relative v WE section')
         plt.subplot(224)
         plt.cla()
         cm = plt.contourf(xx,z,np.squeeze(vx[:,:,lp+1]),vcon)
-        plt.hold(True)
-        cs = plt.contour(xx,z,np.squeeze(vx[:,:,lp+1]),levels=[0,0],colors='k', linewidths=2)
+        #plt.hold(True)
+        cs = plt.contour(xx,z,np.squeeze(vx[:,:,lp+1]),levels=[0],colors='k', linewidths=2)
         plt.colorbar(cm)
         plt.xlabel('Earth-relative v SN section')        
         plt.tight_layout()
