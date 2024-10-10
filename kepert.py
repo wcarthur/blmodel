@@ -7,12 +7,12 @@ import cmath
 import pdb
 
 sns.set_style('ticks', {'image.cmap':'coolwarm'})
-sns.set_context('poster')
+sns.set_context('talk')
 
 class Kepert_linear_assym:
 
     """Analytical linear model of the tropical cyclone boundary layer
-       as in Kepert (JAS, 2001). 
+       as in Kepert (JAS, 2001).
 
        Written Jeff Kepert, Bureau of Meteorology, 1998-2000.
        Copyright the Bureau of Meteorology.
@@ -23,13 +23,13 @@ class Kepert_linear_assym:
        The solution is calculated on a cartesian grid, though wind variables
        (u,v,w) are in cylindrical polar coordinates (lam,r,z). Winds in
        cartesian coords are (ux,vx) etc. An a on appended to
-       variables often refer to the aymmetric parts, s refers to surface 
+       variables often refer to the aymmetric parts, s refers to surface
        conditions, 0, p and m refer to k = 0, +1, -1.
 
        Two possibilities for the core are given - quadratic or cubic. The
        former has a discontinuity in the second radial derivative of the
        vorticity at the rmw, which makes w discontinuous there. The latter
-       is ok there. 
+       is ok there.
     """
 
     def __init__(self, x, y, lat, rm, vm, b, dp, pe, rho, Ut):
@@ -90,18 +90,18 @@ class Kepert_linear_assym:
         Vt = np.ones(rmrbs, float) * Umod
         core = np.where(r >= 2.*rm)
         #Vt[core] = Umod*np.exp(-((r[core]/(2.*rm)) - 1.)**2.)
-    
+
         Z = abs(f) + (b**2*dp*(rmrb**2)*emrmrb/(2*rho*r) -\
                       b**2*dp*rmrb*emrmrb/(2*rho*r) + r*f**2/4) \
             / np.sqrt(b*dp*rmrb*emrmrb/rho + (r*f/2)**2) + \
             (np.sqrt(b*dp*rmrb*emrmrb/rho + (r*f/2)**2))/r
-        
+
         #ax[1].hold(True)
         ax[1].set_xlim([-50, 50])
         ax[1].set_ylim([-50, 50])
         levels = np.arange(-0.02, 0.021, .002)
         cm = ax[1].contourf(xkm, ykm, Z, np.arange(-0.02, 0.021, .002))
-        cs = ax[1].contour(xkm, ykm, Z, np.arange(-0.02, 0.021, .002), 
+        cs = ax[1].contour(xkm, ykm, Z, np.arange(-0.02, 0.021, .002),
                            colors='k')
         ax[1].clabel(cs, fontsize='x-small', fmt='%1.2f') #, range(-20,11,4))
         plt.colorbar(cm, ax=ax[1])
@@ -158,7 +158,7 @@ class Kepert_linear_assym:
         ax[3].set_ylim([-50,50])
         levels = np.arange(-0.02, 0.021, .002)
         cm = ax[3].contourf(xkm, ykm, Z, np.arange(-0.02, 0.021, .002))
-        cs = ax[3].contour(xkm, ykm, Z, np.arange(-0.02, 0.021, .002), 
+        cs = ax[3].contour(xkm, ykm, Z, np.arange(-0.02, 0.021, .002),
                            colors='k')
         ax[3].clabel(cs, fontsize='x-small', fmt='%1.2f') #, range(-20,11,4))
         plt.colorbar(cm, ax=ax[3])
@@ -174,7 +174,7 @@ class Kepert_linear_assym:
         K = 50    # Diffusivity
         C = 0.002 # Drag coefficient
 
-        # Calculate alpha, beta, gamma, chi, eta and psi in Kepert (2001). 
+        # Calculate alpha, beta, gamma, chi, eta and psi in Kepert (2001).
         # The III's are to get the solution in the case where V/r > I.
         al = (f + (2 * V / r)) / (2*K)
         be = (f + Z) / (2*K)
@@ -201,11 +201,11 @@ class Kepert_linear_assym:
              / (albe * ((2 + 2 * i) * (1 + eta * psi) + 3 * psi + 3* i * eta))
         AmIII = -(psi * (1 + 2 * albe + (1 + i) * (1 + albe) * eta) * Umod) \
                 / (albe * ((2 - 2 * i + 3 * (eta + psi) + (2 + 2 * i)*eta*psi)))
-        
+
         Am[III] = AmIII[III]
 
         # First asymmetric surface component
-        ums =       albe * (Am * np.exp(-i*(thetaFm - lam)*np.sign(f))).real  
+        ums =       albe * (Am * np.exp(-i*(thetaFm - lam)*np.sign(f))).real
         vms = np.sign(f) * (Am * np.exp(-i*(thetaFm - lam)*np.sign(f))).imag
 
 
@@ -216,9 +216,9 @@ class Kepert_linear_assym:
         Ap[III] = ApIII[III]
 
         # Second asymmetric surface component
-        ups =       albe * (Ap * np.exp(i*(thetaFm - lam)*np.sign(f))).real 
+        ups =       albe * (Ap * np.exp(i*(thetaFm - lam)*np.sign(f))).real
         vps = np.sign(f) * (Ap * np.exp(i*(thetaFm - lam)*np.sign(f))).imag
-        
+
 
         fig, axes = plt.subplots(2, 2, figsize=(18, 18),
                                  subplot_kw={'aspect':'equal'})
@@ -317,7 +317,7 @@ class Kepert_linear_assym:
         ax[1].set_ylim([-150,150])
         cm = ax[1].contourf(xkm,ykm,vsf,range(-100,101,5))
         cs = ax[1].contour(xkm,ykm,vsf,range(-100,101,5),colors='k')
-        ax[1].clabel(cs, fontsize='x-small', fmt='%1.2f') 
+        ax[1].clabel(cs, fontsize='x-small', fmt='%1.2f')
         plt.colorbar(cm, ax=ax[1])
         ax[1].plot(cx,cy,'w')
         ax[1].plot(2*cx,2*cy,'w')
@@ -335,7 +335,7 @@ class Kepert_linear_assym:
         ax[2].plot(cx,cy,'w')
         ax[2].plot(2*cx,2*cy,'w')
         ax[2].set_xlabel('Earth-relative surface u (cartesian)')
-        
+
         #plt.subplot(224, aspect='equal')
         #plt.cla()
         #plt.hold(True)
@@ -355,7 +355,7 @@ class Kepert_linear_assym:
         plt.savefig('sfc_wind_components.png')
 
 
-        # Four possible surface wind factors \ depending on whether you 
+        # Four possible surface wind factors \ depending on whether you
         # use the total or azimuthal wind, and in moving or fixed coordinates.
         swf1 = np.abs(vs / V)
         swf2 = np.abs(np.sqrt(us**2 + vs**2) / V)
@@ -391,7 +391,7 @@ class Kepert_linear_assym:
         cs = plt.contour(xkm,ykm,swf1,np.arange(0.5,1.55,0.05),colors='k')
         plt.clabel(cs)
         plt.colorbar(cm)
-        plt.plot(cx,cy,'w')        
+        plt.plot(cx,cy,'w')
         plt.plot(2*cx,2*cy,'w')
 
         plt.xlabel('Storm-relative azimuthal swrf')
@@ -418,7 +418,7 @@ class Kepert_linear_assym:
         cm = plt.contourf(xkm,ykm,swf3,levels=np.arange(0.5,1.55,0.05))
         cs = plt.contour(xkm,ykm,swf3,np.arange(0.5,1.55,0.05), colors='k')
         plt.clabel(cs)
-        plt.colorbar(cm) 
+        plt.colorbar(cm)
         plt.plot(cx,cy,'w')
         plt.plot(2*cx,2*cy,'w')
         plt.xlabel('Earth-relative azimuthal swrf')
@@ -430,7 +430,7 @@ class Kepert_linear_assym:
         cm = plt.contourf(xkm,ykm,swf4,levels=np.arange(0.5,1.55,0.05))
         cs = plt.contour(xkm,ykm,swf4,levels=np.arange(0.5,1.55,0.05), colors='k')
         plt.clabel(cs)
-        plt.colorbar(cm) 
+        plt.colorbar(cm)
         plt.plot(cx,cy,'w')
         plt.plot(2*cx,2*cy,'w')
         plt.xlabel('Earth-relative total swrf')
@@ -444,7 +444,7 @@ class Kepert_linear_assym:
         pm = -(1 + i) * np.sqrt(np.abs(np.sqrt(al * be) - gam))
         pm[III] = -i * pm[III]
 
-        # Set up a 3-d grid and calculate winds 
+        # Set up a 3-d grid and calculate winds
         nz = 400
         z = np.arange(5, nz*5+1, 5)
         [ny,nx] = x.shape
@@ -519,7 +519,7 @@ class Kepert_linear_assym:
         #plt.hold(True)
         cs = plt.contour(xx,z,np.squeeze(v[:,:,lp+1]),levels=[0],colors='k', linewidths=2)
         plt.colorbar(cm)
-        plt.xlabel('Storm-relative v SN section')        
+        plt.xlabel('Storm-relative v SN section')
         plt.tight_layout()
         plt.savefig('xsection.png')
 
@@ -558,7 +558,7 @@ class Kepert_linear_assym:
         #plt.hold(True)
         cs = plt.contour(xx,z,np.squeeze(vx[:,:,lp+1]),levels=[0],colors='k', linewidths=2)
         plt.colorbar(cm)
-        plt.xlabel('Earth-relative v SN section')        
+        plt.xlabel('Earth-relative v SN section')
         plt.tight_layout()
         plt.savefig('xsection_fixed.png')
 
